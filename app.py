@@ -318,15 +318,15 @@ def get_risk_level(prob):
 df['risk_level'] = df['churn_probability'].apply(get_risk_level)
 
 # ==================== HEADER ====================
-header_col1, header_col2, header_col3 = st.columns([1, 8, 2])
+header_col1, header_col2, header_col3 = st.columns([0.8, 8, 2], gap="small")
 
 with header_col1:
     try:
-        logo = Image.open('itau_logo.jpg')
-        st.image(logo, width=60)
+        logo = Image.open('Logotipo_da_XP_Investimentos.jpg')
+        st.image(logo, width=100)
     except:
         st.markdown(
-            f"<div style='background: {COLOR_SECONDARY}; width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px;'>🏦</div>",
+            f"<div style='background: {COLOR_SECONDARY}; width: 100px; height: 100px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;'>🏦</div>",
             unsafe_allow_html=True)
 
 with header_col2:
@@ -350,49 +350,30 @@ with header_col3:
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-
 # ==================== FILTROS ====================
-st.markdown(f"""
-<div class="filter-section">
-    <div class="filter-title">🎯 Filtros</div>
-    <p style="font-size: 12px; color: #999; margin: 0;">Personalize a análise dos dados</p>
-</div>
-""", unsafe_allow_html=True)
-
-col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
+# ==================== FILTROS ====================
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.markdown("")
-
-with col2:
     geography_filter = st.selectbox(
         "🌍 Geografia",
-        options=['Todos'] + sorted(df['Geography'].unique()),
-        key="geo_filter"
+        options=['Todos'] + sorted(df['Geography'].unique())
+    )
+
+with col2:
+    gender_filter = st.selectbox(
+        "👤 Gênero",
+        options=['Todos'] + sorted(df['Gender'].unique())
     )
 
 with col3:
-    gender_filter = st.selectbox(
-        "👤 Gênero",
-        options=['Todos'] + sorted(df['Gender'].unique()),
-        key="gender_filter"
+    risk_filter = st.selectbox(
+        "🛡️ Nível de Risco",
+        options=['Todos', 'Baixo', 'Médio', 'Alto']
     )
 
 with col4:
-    risk_filter = st.selectbox(
-        "🛡️ Nível de Risco",
-        options=['Todos', 'Baixo', 'Médio', 'Alto'],
-        key="risk_filter"
-    )
-
-with col5:
-    col5_1, col5_2 = st.columns([1, 1])
-    with col5_2:
-        if st.button("🔄 Limpar Filtros", use_container_width=True):
-            st.session_state.geo_filter = 'Todos'
-            st.session_state.gender_filter = 'Todos'
-            st.session_state.risk_filter = 'Todos'
-            st.rerun()
+    st.markdown("")
 
 # Aplicar filtros
 df_filtered = df.copy()
@@ -502,15 +483,7 @@ with col2:
         f"<p style='font-size: 12px; color: #999; margin-top: -15px;'>Distribuição de características dos clientes</p>",
         unsafe_allow_html=True)
 
-    # Preparar dados
-    profile_data = []
     categories = ['Geografia', 'Gênero', 'Idade', 'Produtos', 'Tempo de Conta']
-
-    # Por Geografia
-    geo_low = len(df_filtered[(df_filtered['risk_level'] == 'Baixo')])
-    geo_med = len(df_filtered[(df_filtered['risk_level'] == 'Médio')])
-    geo_high = len(df_filtered[(df_filtered['risk_level'] == 'Alto')])
-    total_geo = geo_low + geo_med + geo_high
 
     fig = go.Figure(data=[
         go.Bar(name='Baixo', x=categories, y=[35, 30, 40, 35, 32], marker=dict(color=COLOR_SUCCESS)),
@@ -534,51 +507,58 @@ with col2:
 # ==================== INSIGHTS DO MODELO ====================
 with col3:
     st.markdown(f"<h3 class='section-title'>Insights do Modelo</h3>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <div class="insight-box">
-        <div class="insight-text">
-            Clientes com maior probabilidade de churn podem ser prioritários em ações de retenção. O modelo avalia características como idade, geografia, atividade, uso de produtos e informações da conta.
-        </div>
 
-        <div class="insight-item">
-            <div class="insight-item-icon" style="background: rgba(0, 61, 122, 0.1); color: {COLOR_PRIMARY};">🤖</div>
-            <div>
-                <div style="font-weight: 600; font-size: 12px;">Random Forest</div>
-                <div style="font-size: 11px; color: #999;">Algoritmo de Machine Learning</div>
-            </div>
-        </div>
+    with st.container(border=True):
+        st.markdown("""
+        <p style='font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 15px;'>
+        Clientes com maior probabilidade de churn podem ser prioritários em ações de retenção. 
+        O modelo avalia características como idade, geografia, atividade, uso de produtos e informações da conta.
+        </p>
+        """, unsafe_allow_html=True)
 
-        <div class="insight-item">
-            <div class="insight-item-icon" style="background: rgba(46, 204, 113, 0.1); color: {COLOR_SUCCESS};">✓</div>
-            <div>
-                <div style="font-weight: 600; font-size: 12px;">Acurácia do Modelo</div>
-                <div style="font-size: 11px; color: #999;">82,7%</div>
-            </div>
-        </div>
+        insight_col1, insight_col2 = st.columns(2)
 
-        <div class="insight-item">
-            <div class="insight-item-icon" style="background: rgba(255, 140, 0, 0.1); color: {COLOR_SECONDARY};">⚙️</div>
-            <div>
-                <div style="font-weight: 600; font-size: 12px;">10 features principais</div>
-                <div style="font-size: 11px; color: #999;">Variáveis analisadas</div>
+        with insight_col1:
+            st.markdown(f"""
+            <div style='background: rgba(0, 61, 122, 0.05); padding: 12px; border-radius: 6px; border-left: 3px solid {COLOR_PRIMARY};'>
+                <div style='font-size: 12px; font-weight: 600; color: {COLOR_PRIMARY};'>🤖 Random Forest</div>
+                <div style='font-size: 11px; color: #999; margin-top: 4px;'>Algoritmo ML</div>
             </div>
-        </div>
+            """, unsafe_allow_html=True)
 
-        <div class="insight-item">
-            <div class="insight-item-icon" style="background: rgba(255, 107, 107, 0.1); color: {COLOR_DANGER};">📊</div>
-            <div>
-                <div style="font-weight: 600; font-size: 12px;">Previsão de Churn</div>
-                <div style="font-size: 11px; color: #999;">Probabilidade individualizada</div>
+        with insight_col2:
+            st.markdown(f"""
+            <div style='background: rgba(46, 204, 113, 0.05); padding: 12px; border-radius: 6px; border-left: 3px solid {COLOR_SUCCESS};'>
+                <div style='font-size: 12px; font-weight: 600; color: {COLOR_SUCCESS};'>✓ Acurácia: 82,7%</div>
+                <div style='font-size: 11px; color: #999; margin-top: 4px;'>Desempenho</div>
             </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        insight_col3, insight_col4 = st.columns(2)
+
+        with insight_col3:
+            st.markdown(f"""
+            <div style='background: rgba(255, 140, 0, 0.05); padding: 12px; border-radius: 6px; border-left: 3px solid {COLOR_SECONDARY};'>
+                <div style='font-size: 12px; font-weight: 600; color: {COLOR_SECONDARY};'>⚙️ 10 Variáveis</div>
+                <div style='font-size: 11px; color: #999; margin-top: 4px;'>Analisadas</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with insight_col4:
+            st.markdown(f"""
+            <div style='background: rgba(255, 107, 107, 0.05); padding: 12px; border-radius: 6px; border-left: 3px solid {COLOR_DANGER};'>
+                <div style='font-size: 12px; font-weight: 600; color: {COLOR_DANGER};'>📊 Previsão</div>
+                <div style='font-size: 11px; color: #999; margin-top: 4px;'>Probabilidade Churn</div>
+            </div>
+            """, unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 
-# ==================== FOOTER ====================
+# ==================== RODAPÉ ====================
 st.markdown(f"""
 <div style="text-align: center; padding: 20px; border-top: 1px solid {COLOR_BORDER}; margin-top: 20px; color: #999; font-size: 11px;">
-    <p>Churn Insights Dashboard | Itaú Unibanco | Desenvolvido com Python e Streamlit | Machine Learning Powered</p>
+    <p>Churn Insights Dashboard | XP Investimentos | Desenvolvido com Python e Streamlit | Machine Learning</p>
 </div>
 """, unsafe_allow_html=True)
