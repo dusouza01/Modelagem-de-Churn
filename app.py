@@ -13,22 +13,22 @@ warnings.filterwarnings('ignore')
 
 # ==================== CONFIGURAÇÃO DA PÁGINA ====================
 st.set_page_config(
-    page_title="Churn Insights - Itaú",
-    page_icon="📊",
+    page_title="Previsão de Cancelamento",
+    #page_icon="📊",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# ==================== PALETA ITAU ====================
-COLOR_PRIMARY = '#003D7A'  # Azul Itau Escuro
-COLOR_SECONDARY = '#FF8C00'  # Laranja Itau
-COLOR_DANGER = '#FF6B6B'  # Vermelho
-COLOR_SUCCESS = '#2ECC71'  # Verde
-COLOR_WARNING = '#FFA500'  # Laranja Claro
-COLOR_BG = '#F8F9FA'  # Fundo claro
-COLOR_CARD = '#FFFFFF'  # Cards brancos
-COLOR_TEXT = '#1A1A1A'  # Texto escuro
-COLOR_BORDER = '#E8E8E8'  # Bordas
+# ==================== PALETA XP ====================
+COLOR_PRIMARY = '#000000'      # Preto XP
+COLOR_SECONDARY = '#FFD700'    # Amarelo
+COLOR_DANGER = '#FF4D4D'       # Vermelho
+COLOR_SUCCESS = '#FFD700'      # Amarelo XP
+COLOR_WARNING = '#FFC107'      # Amarelo atenção
+COLOR_BG = '#F8F8F8'           # Fundo claro
+COLOR_CARD = '#FFFFFF'         # Cards brancos
+COLOR_TEXT = '#111111'         # Texto preto
+COLOR_BORDER = '#E5E5E5'       # Bordas
 
 # ==================== CSS CUSTOMIZADO ====================
 st.markdown(f"""
@@ -81,33 +81,33 @@ st.markdown(f"""
         }}
 
         .header-badge {{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #F0F8FF;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: 1px solid {COLOR_SUCCESS};
-        }}
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #F0F8FF;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #FBC105;
+}}
 
-        .badge-status {{
-            width: 10px;
-            height: 10px;
-            background: {COLOR_SUCCESS};
-            border-radius: 50%;
-        }}
+.badge-status {{
+    width: 10px;
+    height: 10px;
+    background: #FBC105;
+    border-radius: 50%;
+}}
 
-        .badge-text {{
-            color: {COLOR_SUCCESS};
-            font-size: 12px;
-            font-weight: 600;
-        }}
+.badge-text {{
+    color: #FBC105;
+    font-size: 12px;
+    font-weight: 600;
+}}
 
-        .badge-count {{
-            color: {COLOR_PRIMARY};
-            font-size: 12px;
-            font-weight: 600;
-        }}
+.badge-count {{
+    color: #000000;
+    font-size: 12px;
+    font-weight: 600;
+}}
 
         .filter-section {{
             background: {COLOR_CARD};
@@ -332,8 +332,8 @@ with header_col1:
 with header_col2:
     st.markdown(f"""
     <div class="header-text">
-        <h1>Churn Insights</h1>
-        <p>Customer Retention Intelligence · Machine Learning Dashboard</p>
+        <h1>Previsão de Churn</h1>
+        <p>Inteligência de Retenção de Clientes · Dashboard de Machine Learning</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -350,7 +350,6 @@ with header_col3:
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-# ==================== FILTROS ====================
 # ==================== FILTROS ====================
 col1, col2, col3, col4 = st.columns(4)
 
