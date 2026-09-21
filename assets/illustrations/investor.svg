@@ -1,0 +1,27 @@
+<svg class="investor-scene" viewBox="0 0 560 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="investor-title investor-description">
+<title id="investor-title">Investidor acompanhando o crescimento do patrimônio</title><desc id="investor-description">Um homem sentado usa um notebook. Ao seu lado, barras ascendentes, moedas douradas e uma seta representam investimentos e ganhos financeiros ilustrativos.</desc>
+<defs><linearGradient id="panel" x2="1" y2="1"><stop stop-color="#343B2B"/><stop offset="1" stop-color="#20251D"/></linearGradient><linearGradient id="gold" x2="0" y2="1"><stop stop-color="#FFE86A"/><stop offset="1" stop-color="#D4AB00"/></linearGradient><pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#414837" stroke-width=".6"/></pattern></defs>
+<circle cx="302" cy="208" r="181" fill="#242C1D"/><circle cx="302" cy="208" r="199" fill="none" stroke="#475136" stroke-dasharray="3 10"/>
+<g class="market-panel"><rect x="193" y="58" width="321" height="261" rx="23" fill="url(#panel)" stroke="#586045"/><rect x="216" y="107" width="270" height="177" fill="url(#grid)"/><circle cx="216" cy="81" r="4" fill="#FFD700"/><text x="230" y="86" fill="#D4DDC7" font-family="Arial" font-size="10" letter-spacing="2">PATRIMÔNIO EM MOVIMENTO</text>
+<g fill="url(#gold)"><rect class="growth-bar bar-one" x="278" y="220" width="35" height="65" rx="6"/><rect class="growth-bar bar-two" x="332" y="184" width="35" height="101" rx="6"/><rect class="growth-bar bar-three" x="386" y="151" width="35" height="134" rx="6"/><rect class="growth-bar bar-four" x="440" y="119" width="35" height="166" rx="6"/></g>
+<path class="trend-line" d="M240 219L294 176L345 182L395 126L456 96" stroke="#FFF4B0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M441 96L458 95L453 111" fill="none" stroke="#FFF4B0" stroke-width="4" stroke-linecap="round"/>
+</g>
+<ellipse cx="277" cy="387" rx="227" ry="16" fill="#10170E" opacity=".7"/>
+<g class="investor-person">
+<path d="M108 243Q87 236 86 258L91 322Q94 338 113 338H212V319H118Z" fill="#59664A"/><path d="M110 332L97 382M195 332L210 382" stroke="#859372" stroke-width="8" stroke-linecap="round"/>
+<path d="M147 280L228 282Q244 284 242 303L226 363H203L210 314L158 320Q128 321 127 299" fill="#858E79"/><path d="M145 298L185 317L165 370H143L153 327L118 315Z" fill="#B7BFAB"/>
+<path d="M202 359L225 360L246 374Q250 383 239 384H201Z" fill="#F1F1DF"/><path d="M143 363L163 366L176 381Q178 388 169 388H135Z" fill="#E5E6D5"/>
+<path d="M139 181Q170 174 190 195L201 246L188 288L119 283L112 220Q111 193 139 181" fill="#E6E8DA"/>
+<path d="M156 176L157 193Q169 204 177 189L177 164" fill="#BF8054"/>
+<path d="M142 136Q140 108 166 108Q193 108 196 139L191 164Q184 184 165 180Q144 174 142 151Z" fill="#D99D70"/>
+<path d="M140 145Q128 118 145 108Q146 94 172 98Q197 99 199 118L193 138L186 133L183 118Q162 131 147 123L148 145Z" fill="#181D16"/>
+<path d="M177 158Q184 162 189 154" fill="none" stroke="#7F4F34" stroke-width="2" stroke-linecap="round"/><circle cx="181" cy="140" r="2" fill="#1E2319"/>
+<path d="M181 201L199 234L234 243L229 257L184 248L164 219" fill="#D99D70"/><path d="M179 194L193 222L172 234L157 210" fill="#E6E8DA"/>
+<path d="M125 214L138 253L183 260" fill="none" stroke="#D99D70" stroke-width="17" stroke-linecap="round"/>
+<path d="M176 259L211 261" stroke="#D99D70" stroke-width="12" stroke-linecap="round"/>
+<path d="M192 227H262L247 272H178Z" fill="#464F3C" stroke="#9BA889" stroke-width="2"/><path d="M173 274H249" stroke="#B9C3AC" stroke-width="5" stroke-linecap="round"/><circle cx="226" cy="248" r="5" fill="#FFD700"/>
+</g>
+<g class="coin-stack"><rect x="363" y="356" width="76" height="23" rx="9" fill="#BA9300"/><ellipse cx="401" cy="356" rx="38" ry="10" fill="#FFDA2C"/><rect x="363" y="336" width="76" height="22" rx="9" fill="#D6AA0A"/><ellipse cx="401" cy="336" rx="38" ry="10" fill="#FFE568"/><rect x="363" y="316" width="76" height="22" rx="9" fill="#D6AA0A"/><ellipse cx="401" cy="316" rx="38" ry="10" fill="#FFE568"/></g>
+<g class="floating-coin"><circle cx="452" cy="287" r="28" fill="url(#gold)" stroke="#FBE991" stroke-width="3"/><circle cx="452" cy="287" r="20" fill="none" stroke="#A48300"/><text x="452" y="297" text-anchor="middle" font-size="29" font-weight="bold" font-family="Arial" fill="#705B00">$</text></g>
+<g class="gain-badge"><rect x="38" y="64" width="126" height="58" rx="15" fill="#FFD700"/><path d="M53 101L66 85L78 92L91 77" fill="none" stroke="#29301F" stroke-width="3"/><text x="104" y="101" font-size="27" font-family="Arial" fill="#29301F">+</text></g>
+</svg>
