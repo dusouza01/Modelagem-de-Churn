@@ -2,6 +2,7 @@
 import streamlit as st
 
 from .importing import analyze_import
+from .help_text import PURPOSE_HELP, CSV_HELP
 from .model import get_model
 from .validation import DataValidationError, FEATURES, IDENTITY
 
@@ -20,7 +21,7 @@ def render_import():
             st.caption("Colunas extras não entram no modelo. As regras validam o contrato técnico; não certificam a origem nem a qualidade de negócio dos dados.")
             st.json({**metadata, "calibration": {"Calibrado": metadata["calibration"]["Calibrado"]}}, expanded=False)
         purpose = st.selectbox("Finalidade da importação", ["Prever risco de clientes", "Avaliar resultados históricos"], index=None,
-                               placeholder="Escolha a finalidade antes de enviar", key="import_purpose")
+                               placeholder="Escolha a finalidade antes de enviar", key="import_purpose", help=PURPOSE_HELP)
         if purpose is None:
             st.info("Escolha se deseja prever riscos ou avaliar cancelamentos já observados.")
             return
@@ -30,7 +31,8 @@ def render_import():
                            "estrutura_clientes.csv", "text/csv", key="schema_download")
         st.caption("O modelo de arquivo contém somente o cabeçalho. Preencha com seus dados; nenhum cliente de exemplo foi inventado.")
         upload = st.file_uploader("Arquivo CSV", type=["csv"], max_upload_size=10,
-                                  key="historical_upload" if historical else "prediction_upload")
+                                  key="historical_upload" if historical else "prediction_upload",
+                                  help=CSV_HELP + "\n\n**Categorias aceitas:** " + "; ".join(f"{name}: {', '.join(values)}" for name, values in bundle["categories"].items()))
         if upload is None:
             return
         try:

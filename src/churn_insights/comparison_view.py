@@ -5,6 +5,7 @@ import streamlit as st
 from .comparison import compare_strategies
 from .comparison_export import comparison_csv
 from .model import get_model
+from .help_text import comparison_capacity_help
 
 
 def render_comparison(test_data, *, complete_with_active):
@@ -18,23 +19,7 @@ def render_comparison(test_data, *, complete_with_active):
         capacity = st.number_input(
             "Capacidade de atendimento (clientes)", min_value=1, value=None, step=1,
             placeholder="Digite a quantidade de clientes", key="comparison_capacity",
-            help=(
-                "**Por que os resultados ficam iguais quando a capacidade cobre toda a base?**\n\n"
-                f"Esta avaliação contém **{len(test_data):,} clientes de teste**. Quando a capacidade alcança ou supera esse total, "
-                "as estratégias selecionam os mesmos clientes; apenas a ordem de seleção muda. "
-                "A regra de inativos primeiro também inclui os ativos para completar as vagas.\n\n"
-                f"Na base atual há **{int(test_data.Exited.sum()):,} cancelamentos registrados**. "
-                "Ao selecionar toda a base, todas as estratégias identificam esses cancelamentos, "
-                "alcançam 100% de cobertura quando há cancelamentos e apresentam a mesma taxa histórica e a mesma probabilidade média estimada.\n\n"
-                "**Isso não significa que a probabilidade estimada seja igual à taxa histórica.** "
-                "Essas duas medidas podem diferir entre si; o que coincide é o resultado de cada medida entre as estratégias.\n\n"
-                f"Para investigar a vantagem da priorização, informe uma capacidade **menor que {len(test_data):,}**. "
-                "Com vagas para todos, a ordem de prioridade deixa de alterar quem entra na seleção. "
-                "Capacidades acima do tamanho da base não duplicam clientes."
-            ) if complete_with_active else (
-                "Quando a capacidade cobre a base completa, modelo e seleção aleatória selecionam os mesmos clientes. "
-                "Inativos primeiro pode selecionar menos clientes quando o preenchimento com ativos está desativado."
-            ),
+            help=comparison_capacity_help(len(test_data), int(test_data.Exited.sum()), complete_with_active),
         )
         if capacity is None:
             st.info("Informe a capacidade para calcular a comparação. Nenhuma quantidade foi predefinida.")

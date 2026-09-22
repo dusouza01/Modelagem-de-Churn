@@ -10,6 +10,7 @@ from .presentation import render_header, render_ml_method
 from .comparison_view import render_comparison
 from .calibration_view import render_calibration
 from .import_view import render_import
+from .help_text import COUNTRY_HELP, GENDER_HELP, PRIORITY_HELP, CAPACITY_HELP, MINIMUM_RISK_HELP, SCOPE_HELP, SEARCH_HELP
 
 ROOT = Path(__file__).resolve().parents[2]
 COUNTRIES = {"France": "França", "Germany": "Alemanha", "Spain": "Espanha", "Todos": "Todos os países"}
@@ -58,24 +59,24 @@ def main():
     st.html('<div class="section-heading"><h2 id="carteira">Visão da carteira</h2><span>01 / OVERVIEW</span></div>')
     with st.container(border=True):
         columns = st.columns([1.2, 1.2, 1.2, 0.8], vertical_alignment="bottom")
-        country = columns[0].selectbox("País", ["Todos"] + sorted(data.Geography.unique()), format_func=lambda x: COUNTRIES.get(x, x), key="country")
-        gender = columns[1].selectbox("Gênero", ["Todos"] + sorted(data.Gender.unique()), format_func=lambda x: GENDERS.get(x, x), key="gender")
-        risk = columns[2].selectbox("Prioridade", ["Todos"] + PRIORITY_ORDER, key="risk")
+        country = columns[0].selectbox("País", ["Todos"] + sorted(data.Geography.unique()), format_func=lambda x: COUNTRIES.get(x, x), key="country", help=COUNTRY_HELP)
+        gender = columns[1].selectbox("Gênero", ["Todos"] + sorted(data.Gender.unique()), format_func=lambda x: GENDERS.get(x, x), key="gender", help=GENDER_HELP)
+        risk = columns[2].selectbox("Prioridade", ["Todos"] + PRIORITY_ORDER, key="risk", help=PRIORITY_HELP)
         columns[3].button("Limpar filtros ↺", on_click=reset_filters, width="stretch")
 
         capacity_col, risk_col, scope_col = st.columns(3)
         priority_capacity = capacity_col.number_input(
-            "Capacidade de atendimento da carteira (clientes)", help="**Capacidade é o máximo de clientes que você consegue atender.** Primeiro, o sistema considera o público escolhido e exige risco estimado maior ou igual ao risco mínimo informado. Depois, ordena esses clientes do maior para o menor risco e seleciona até a capacidade. Empates são resolvidos pelo ID. Exemplo ilustrativo: com 50 vagas e apenas 12 clientes atingindo o limite, serão 12 prioritários e 38 vagas não utilizadas; clientes abaixo do limite não completam a lista. País, gênero, prioridade e busca apenas filtram a exibição. Este campo não altera o modelo e é independente da capacidade na comparação histórica.", min_value=1, value=None, step=1,
+            "Capacidade de atendimento da carteira (clientes)", help=CAPACITY_HELP, min_value=1, value=None, step=1,
             placeholder="Informe quantos clientes pode atender", key="priority_capacity",
         )
         minimum_risk_percent = risk_col.number_input(
             "Risco mínimo para prioridade (%)", min_value=0.0, max_value=100.0, value=None, step=1.0,
             placeholder="Defina o percentual mínimo", key="minimum_risk",
-            help="**Defina a probabilidade mínima de churn para participar da seleção.** Informe um percentual entre 0 e 100. O limite é inclusivo: em um exemplo ilustrativo com 60%, clientes com risco de 60% ou mais podem ser selecionados; abaixo disso recebem ‘Abaixo do risco mínimo’. Entre os que atingem o limite e pertencem ao público escolhido, apenas os maiores riscos até a capacidade ficam prioritários. Os demais ficam ‘Fora da capacidade’. Com 0%, todos do público passam pelo critério de risco; com 100%, apenas probabilidades de exatamente 100%. O campo vazio não define prioridades. O percentual é uma regra da sua análise: não retreina o modelo, não garante cancelamento e não significa ausência de risco abaixo do limite.",
+            help=MINIMUM_RISK_HELP,
         )
         priority_scope = scope_col.selectbox(
             "Público da prioridade", ["Clientes sem cancelamento", "Todos · demonstração histórica"],
-            index=None, placeholder="Escolha o público", key="priority_scope",
+            index=None, placeholder="Escolha o público", key="priority_scope", help=SCOPE_HELP,
         )
 
     include_exited = None if priority_scope is None else priority_scope == "Todos · demonstração histórica"
@@ -187,7 +188,7 @@ def main():
     st.html('<div class="section-heading"><h2 id="dados">Clientes em foco</h2><span>06 / EXPLORAR</span></div>')
     with st.container(border=True):
         search_col, export_col = st.columns([3, 1], vertical_alignment="bottom")
-        search = search_col.text_input("Buscar cliente", placeholder="Digite um sobrenome ou ID…", key="search")
+        search = search_col.text_input("Buscar cliente", placeholder="Digite um sobrenome ou ID…", key="search", help=SEARCH_HELP)
         clients = filtered.sort_values(["churn_probability", "CustomerId"], ascending=[False, True])
         if search.strip():
             query = search.strip()
