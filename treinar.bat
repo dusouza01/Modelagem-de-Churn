@@ -7,11 +7,12 @@ if not exist ".venv\Scripts\python.exe" (
 )
 ".venv\Scripts\python.exe" -m pip install -r requirements.txt
 if errorlevel 1 goto :error
-".venv\Scripts\python.exe" -m streamlit run app.py --server.address localhost
+".venv\Scripts\python.exe" train.py
 if errorlevel 1 goto :error
+echo Treinamento concluido. Agora execute iniciar.bat.
+pause
 exit /b 0
 :error
-echo.
-echo Nao foi possivel iniciar. Confira o erro acima e a instalacao do Python 3.13.
+echo Nao foi possivel treinar. Confira o erro acima.
 pause
 exit /b 1

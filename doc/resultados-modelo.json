@@ -1,0 +1,27 @@
+{
+  "model_version": "20260921T201631Z-96682524",
+  "trained_at_utc": "2026-09-21T20:16:31.680749+00:00",
+  "data_sha256": "3996cd1fa372e0db0cd9c0ebac35bbd4e8e3c65fb942bb010c826e7b1eeef0a0",
+  "runtime": {
+    "python": "3.13.7",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "pandas": "2.3.3",
+    "joblib": "1.6.0"
+  },
+  "metrics": {
+    "accuracy": 0.8685,
+    "auc": 0.8571020943902299,
+    "features": 10,
+    "test_count": 2000,
+    "train_count": 8000
+  },
+  "calibration": {
+    "Calibrado": {
+      "brier": 0.10166460294034829,
+      "log_loss": 0.34016320600952743
+    }
+  },
+  "requested_capacity": null
+}
