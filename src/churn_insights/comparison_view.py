@@ -51,8 +51,8 @@ def render_comparison(test_data, *, complete_with_active):
         labels = ["Modelo · seleção definida", "Aleatória · média esperada", "Inativos primeiro · média esperada"]
         fig = go.Figure()
         for name, values, color in [
-            ("Probabilidade estimada", results.predicted_rate * 100, "#C2A000"),
-            ("Taxa histórica", results.precision * 100, "#242824"),
+            ("Probabilidade estimada", results.predicted_rate * 100, "#195AB4"),
+            ("Taxa histórica", results.precision * 100, "#05132A"),
         ]:
             fig.add_bar(y=labels, x=values, name=name, orientation="h", marker_color=color,
                         text=[f"{value:.1f}%".replace(".", ",") for value in values],
@@ -61,8 +61,8 @@ def render_comparison(test_data, *, complete_with_active):
         fig.update_layout(height=350, barmode="group", bargap=0.3,
                           margin=dict(l=16, r=24, t=12, b=70),
                           paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                          font=dict(color="#555B54"), legend=dict(orientation="h", y=-0.25),
-                          xaxis=dict(title="Percentual entre os selecionados (%)", range=[0,100], gridcolor="#ECEEE8"),
+                          font=dict(color="#4A5568"), legend=dict(orientation="h", y=-0.25),
+                          xaxis=dict(title="Percentual entre os selecionados (%)", range=[0,100], gridcolor="#E6EAF1"),
                           yaxis=dict(autorange="reversed"))
         st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
         st.caption("Valor real significa resultado histórico (Exited), não uma probabilidade individual conhecida. Para as estratégias com sorteio, ambos os percentuais representam médias esperadas sobre as seleções possíveis, não um sorteio realizado.")
@@ -74,14 +74,14 @@ def render_comparison(test_data, *, complete_with_active):
                            if cancellations else f"{row.captured:.2f} · cobertura indisponível".replace(".", ",")
                            for row in results.itertuples()]
         capture_fig = go.Figure(go.Bar(y=labels, x=results.captured, orientation="h",
-                                     marker_color="#647A52", text=coverage_labels, textposition="auto",
+                                     marker_color="#307AE0", text=coverage_labels, textposition="auto",
                                      customdata=results.result_type,
                                      hovertemplate="%{y}<br>%{x:.2f} cancelamentos identificados<br>%{customdata}<extra></extra>"))
         capture_fig.update_layout(height=270, margin=dict(l=16, r=24, t=12, b=40),
                                   paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                                  font=dict(color="#555B54"), yaxis=dict(autorange="reversed"),
+                                  font=dict(color="#4A5568"), yaxis=dict(autorange="reversed"),
                                   xaxis=dict(title="Cancelamentos identificados (clientes)",
-                                             range=[0, max(1, cancellations)], gridcolor="#ECEEE8"))
+                                             range=[0, max(1, cancellations)], gridcolor="#E6EAF1"))
         st.plotly_chart(capture_fig, width="stretch", config={"displayModeBar": False})
         st.caption("Maior cobertura significa encontrar mais cancelamentos históricos dentro da capacidade. Isso não mede cancelamentos evitados. A proximidade entre as barras do primeiro gráfico é um diagnóstico agregado; consulte também a curva de calibração.")
         st.dataframe(table, hide_index=True, width="stretch", column_config={

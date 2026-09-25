@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[2]
-LOGO_PATH = ROOT / "imagens" / "Logotipo_da_XP_Investimentos.jpg"
+LOGO_PATH = ROOT / "imagens" / "Logo_BTGPactual_negativa.jpg"
 
 
 @st.cache_data
@@ -16,7 +16,7 @@ def _logo_data_uri():
 
 
 def render_header():
-    st.markdown(f'<div class="topbar"><div class="brand"><img class="brand-mark" src="{_logo_data_uri()}" alt="XP Investimentos"><span>CHURN<span class="brand-light"> ANALISYS</span></span></div><div class="topbar-right"><span class="status-dot"></span> Ambiente local <span class="separator">/</span> Inteligência de retenção</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="topbar"><div class="brand"><img class="brand-mark" src="{_logo_data_uri()}" alt="BTG Pactual"><span><span class="brand-light">ANÁLISE DE </span>CHURN</span></div><div class="topbar-right"><span class="status-dot"></span> Ambiente local <span class="separator">/</span> Inteligência de retenção</div></div>', unsafe_allow_html=True)
     st.markdown('<section class="hero"><div class="hero-copy"><div class="eyebrow">CIÊNCIA DE DADOS · MACHINE LEARNING APLICADO</div><h1>Entenda os sinais.<br><span class="hero-emphasis">Antecipe a próxima ação.</span></h1><p>Uma aplicação de Machine Learning e Ciência de Dados para estimar risco de churn e apoiar a priorização de clientes, com avaliação histórica, probabilidades calibradas e um dashboard interativo.</p><div class="hero-tags"><span>Python · scikit-learn</span><span>Random Forest calibrado</span><span>Streamlit · Plotly</span></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="art-core">↗</div><span class="art-label">DADOS → INSIGHTS → AÇÃO</span></div></section>', unsafe_allow_html=True)
 
 

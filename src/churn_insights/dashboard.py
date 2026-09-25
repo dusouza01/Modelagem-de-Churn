@@ -37,15 +37,15 @@ def reset_filters():
 def chart_layout(fig, height=300):
     fig.update_layout(height=height, margin=dict(l=12, r=12, t=20, b=12),
                       paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                      font=dict(family="Arial, sans-serif", color="#555B54", size=12),
+                      font=dict(family="Arial, sans-serif", color="#4A5568", size=12),
                       legend=dict(orientation="h", y=-0.15, x=0),
-                      hoverlabel=dict(bgcolor="#171817", font_color="white"))
+                      hoverlabel=dict(bgcolor="#05132A", font_color="white"))
     return fig
 
 
 
 def main():
-    st.set_page_config(page_title="Churn Analisys | Retenção", page_icon="◈", layout="wide", initial_sidebar_state="collapsed")
+    st.set_page_config(page_title="Análise de Churn | Retenção", page_icon="◈", layout="wide", initial_sidebar_state="collapsed")
     st.html(ROOT / "assets" / "css" / "styles.css")
     try:
         with st.spinner("Preparando a análise da carteira…"):
@@ -134,11 +134,11 @@ def main():
             st.caption("Machine Learning aplicado: como as probabilidades de churn se distribuem no recorte selecionado.")
             fig = go.Figure(go.Histogram(
                 x=filtered.churn_probability * 100, xbins=dict(start=0, end=100, size=10),
-                marker_color="#FFD700", hovertemplate="Risco: %{x}%<br>%{y} clientes<extra></extra>",
+                marker_color="#195AB4", hovertemplate="Risco: %{x}%<br>%{y} clientes<extra></extra>",
             ))
             chart_layout(fig)
             fig.update_layout(xaxis=dict(title="Probabilidade de churn (%)", range=[0, 100]),
-                              yaxis=dict(title="Clientes", gridcolor="#ECEEE8"), bargap=0.08)
+                              yaxis=dict(title="Clientes", gridcolor="#E6EAF1"), bargap=0.08)
             st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
         with right, st.container(border=True):
             st.subheader("Risco e histórico por país")
@@ -146,11 +146,11 @@ def main():
             grouped = filtered.groupby("Geography").agg(risk=("churn_probability", "mean"), churn=("Exited", "mean"), clients=("CustomerId", "size"))
             labels = [COUNTRIES.get(country, country) for country in grouped.index]
             fig = go.Figure()
-            for label, column, color in [("Risco estimado", "risk", "#FFD700"), ("Churn observado", "churn", "#242824")]:
+            for label, column, color in [("Risco estimado", "risk", "#195AB4"), ("Churn observado", "churn", "#05132A")]:
                 fig.add_bar(name=label, x=labels, y=grouped[column] * 100, marker_color=color,
                             customdata=grouped.clients, hovertemplate="%{x}<br>%{y:.1f}%<br>%{customdata} clientes<extra>%{fullData.name}</extra>")
             chart_layout(fig)
-            fig.update_layout(barmode="group", bargap=0.3, yaxis=dict(title="Percentual (%)", gridcolor="#ECEEE8"))
+            fig.update_layout(barmode="group", bargap=0.3, yaxis=dict(title="Percentual (%)", gridcolor="#E6EAF1"))
             st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
     if total:
@@ -208,4 +208,4 @@ def main():
             listed_priority = int((clients.priority == "Prioritário").sum())
             st.caption(f"Nesta tabela: {number(listed_priority)} prioritários e {number(len(clients) - listed_priority)} com outros status. A ordenação pode concentrar prioritários nas primeiras linhas; role a tabela para consultar o restante.")
 
-    st.markdown('<footer><span><strong>CHURN ANALISYS</strong> / Inteligência de retenção</span><span>Ciência de Dados · Machine Learning aplicado</span></footer>', unsafe_allow_html=True)
+    st.markdown('<footer><span><strong>ANÁLISE DE CHURN</strong> / Inteligência de retenção</span><span>Ciência de Dados · Machine Learning aplicado</span></footer>', unsafe_allow_html=True)

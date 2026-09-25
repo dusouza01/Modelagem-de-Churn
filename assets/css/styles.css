@@ -1,8 +1,10 @@
 :root {
-    --ink: #171817;
-    --muted: #73786f;
-    --yellow: #ffd700;
-    --line: #e4e7df;
+    /* Paleta oficial BTG Pactual: 05132A 0B2859 10408D 195AB4 307AE0 549CFF 6BAAFF 87BAFF B1D2FF D2E5FF */
+    --ink: #05132a;
+    --muted: #6b7689;
+    --accent: #195ab4;
+    --accent-light: #6baaff;
+    --line: #e1e6ef;
 }
 
 /* =========================
@@ -10,7 +12,7 @@
 ========================= */
 
 .stApp {
-    background: #f5f5f2;
+    background: #f4f6fa;
 }
 
 .stMainBlockContainer {
@@ -19,7 +21,7 @@
 }
 
 [data-testid="stHeader"] {
-    background: rgba(245, 245, 242, .92);
+    background: rgba(244, 246, 250, .92);
 }
 
 h1,
@@ -52,10 +54,10 @@ p {
 }
 
 .brand-mark {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-    object-fit: cover;
+    height: 52px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: contain;
     display: block;
 }
 
@@ -79,7 +81,7 @@ p {
 }
 
 .separator {
-    color: #bcc1b7;
+    color: #b8c1d1;
     margin: 0 5px;
 }
 
@@ -116,7 +118,7 @@ p {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 2.3px;
-    color: #c8d0bf;
+    color: #87baff;
     margin-bottom: 16px;
 }
 
@@ -135,13 +137,13 @@ p {
 }
 
 .hero h1 .hero-emphasis {
-    color: var(--yellow);
+    color: var(--accent-light);
 }
 
 .hero p {
     font-size: 13px;
     line-height: 1.75;
-    color: #b5bcad;
+    color: #b1d2ff;
     margin: 18px 0 21px;
     max-width: 600px;
 }
@@ -153,15 +155,15 @@ p {
 }
 
 .hero-tags span {
-    border: 1px solid #41463b;
+    border: 1px solid #0b2859;
     padding: 6px 11px;
     border-radius: 30px;
-    color: #d3d9cb;
+    color: #d2e5ff;
     font-size: 10px;
 }
 
 .hero-tags span:first-child {
-    color: var(--yellow);
+    color: var(--accent-light);
 }
 
 
@@ -185,7 +187,7 @@ p {
 
 .orbit {
     position: absolute;
-    border: 1px solid #5e6640;
+    border: 1px solid #10408d;
     border-radius: 50%;
     transform: rotate(-28deg);
 }
@@ -211,8 +213,8 @@ p {
     width: 112px;
     height: 112px;
 
-    background: var(--yellow);
-    color: #171817;
+    background: var(--accent);
+    color: white;
 
     font-size: 75px;
 
@@ -223,7 +225,7 @@ p {
 
     transform: rotate(-10deg);
 
-    box-shadow: 0 0 85px #ffd7001c;
+    box-shadow: 0 0 85px #195ab433;
 
     animation: float-in 1s ease-out both;
 }
@@ -232,7 +234,7 @@ p {
     position: absolute;
     bottom: -8px;
 
-    color: #929b83;
+    color: #6baaff;
 
     font-size: 8px;
     letter-spacing: 2.5px;
@@ -266,7 +268,7 @@ p {
 
 .section-heading > span {
     font-size: 9px;
-    color: #858b7f;
+    color: #7d889b;
     letter-spacing: 1.7px;
 }
 
@@ -294,7 +296,7 @@ p {
 
 .stButton button,
 .stDownloadButton button {
-    border: 1px solid #dce0d5;
+    border: 1px solid #d6dde8;
     border-radius: 9px;
 
     font-size: 12px;
@@ -308,17 +310,17 @@ p {
 
 .stButton button:hover,
 .stDownloadButton button:hover {
-    background: #fff9d4;
+    background: #d2e5ff;
     color: var(--ink);
 
-    border-color: #d5af00;
+    border-color: #195ab4;
 
     transform: translateY(-2px);
 }
 
 button:focus-visible,
 a:focus-visible {
-    outline: 3px solid #aa8c00 !important;
+    outline: 3px solid #195ab4 !important;
     outline-offset: 3px;
 }
 
@@ -346,7 +348,7 @@ a:focus-visible {
 
 .metric-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px #2027190a;
+    box-shadow: 0 12px 28px #05132a14;
 }
 
 .metric-top {
@@ -354,7 +356,7 @@ a:focus-visible {
     align-items: center;
     justify-content: space-between;
 
-    color: #62695b;
+    color: #5a6579;
 
     font-size: 11px;
 
@@ -364,7 +366,7 @@ a:focus-visible {
 .metric-index {
     font-size: 9px;
 
-    border: 1px solid #e5e8e0;
+    border: 1px solid #e1e6ef;
 
     padding: 4px 6px;
 
@@ -386,7 +388,7 @@ a:focus-visible {
 
 .metric-caption {
     font-size: 10px;
-    color: #747a6e;
+    color: #6b7689;
 
     line-height: 1.5;
 }
@@ -395,17 +397,21 @@ a:focus-visible {
 /* Accent metric */
 
 .metric-card.accent {
-    background: var(--yellow);
-    border-color: var(--yellow);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .accent .metric-top,
 .accent .metric-caption {
-    color: #4e450c;
+    color: #d2e5ff;
+}
+
+.accent .metric-value {
+    color: white;
 }
 
 .accent .metric-index {
-    border-color: #bfa615;
+    border-color: #87baff;
 }
 
 
@@ -421,11 +427,11 @@ a:focus-visible {
 
 [data-testid="stCaptionContainer"] p {
     font-size: 11px;
-    color: #747b6d;
+    color: #6b7689;
 }
 
 .model-label {
-    color: #858d77;
+    color: #7d889b;
     margin-top: 5px;
     margin-bottom: 8px;
 }
@@ -456,7 +462,7 @@ footer {
 
     padding: 25px 0 10px;
 
-    color: #8a9083;
+    color: #7d889b;
 
     font-size: 10px;
 
@@ -466,7 +472,7 @@ footer {
 }
 
 footer strong {
-    color: #535b4a;
+    color: #3a4a63;
 
     font-size: 10px;
 

@@ -25,8 +25,8 @@ def render_calibration(metrics):
         fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                             row_heights=[0.72, 0.28], vertical_spacing=0.12)
         for name, column, color in [
-            ("Taxa de cancelamento observada", "observed", "#427A4B"),
-            ("Probabilidade média estimada", "predicted", "#C2A000"),
+            ("Taxa de cancelamento observada", "observed", "#05132A"),
+            ("Probabilidade média estimada", "predicted", "#195AB4"),
         ]:
             fig.add_scatter(
                 x=reliability.interval.astype(str), y=reliability[column] * 100,
@@ -45,7 +45,7 @@ def render_calibration(metrics):
             )
         fig.add_trace(go.Bar(
             x=reliability.interval.astype(str), y=reliability.clients,
-            name="Clientes por faixa", showlegend=False, marker_color="#A9B8A5",
+            name="Clientes por faixa", showlegend=False, marker_color="#B1D2FF",
             text=[f"{n:,}".replace(",", ".") for n in reliability.clients],
             textposition="outside", cliponaxis=False,
             hovertemplate="Faixa: %{x}<br>Clientes de teste: %{y}<extra></extra>",
@@ -56,14 +56,14 @@ def render_calibration(metrics):
         fig.update_layout(
             height=550, margin=dict(l=20, r=20, t=25, b=100),
             paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#555B54"), legend=dict(orientation="h", y=-0.22),
+            font=dict(color="#4A5568"), legend=dict(orientation="h", y=-0.22),
         )
         fig.update_xaxes(type="category", categoryorder="array",
                          categoryarray=reliability.interval.astype(str).tolist())
         fig.update_xaxes(title="Faixa de risco estimado (%)", row=2, col=1)
-        fig.update_yaxes(title="Taxa / probabilidade (%)", range=[0, 100], gridcolor="#ECEEE8", row=1, col=1)
+        fig.update_yaxes(title="Taxa / probabilidade (%)", range=[0, 100], gridcolor="#E6EAF1", row=1, col=1)
         fig.update_yaxes(title="Clientes", range=[0, max(1, reliability.clients.max()) * 1.3],
-                         gridcolor="#ECEEE8", row=2, col=1)
+                         gridcolor="#E6EAF1", row=2, col=1)
         st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
         st.caption("Verde: taxa de cancelamento observada em Exited. Amarelo: média das probabilidades calibradas. Cada par compara os mesmos clientes de teste. Verde acima do amarelo indica subestimação; abaixo, superestimação. A proximidade indica concordância naquela faixa, não acerto individual.")
         st.caption("As barras inferiores mostram quantos clientes sustentam cada comparação. As hastes verdes representam o intervalo de confiança de 95% de Wilson para a taxa observada. Grupos menores tendem a ter maior incerteza; o intervalo também depende da taxa. Faixas vazias não têm estimativa nem intervalo e interrompem as linhas.")
